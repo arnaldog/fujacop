@@ -1,0 +1,32 @@
+{
+    "name": "fujacop",
+    "version": "0.0.0",
+    "description": "Javascript Functions",
+    "main": "index.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "test": "make test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/arnaldog/fujacop.git"
+    },
+    "keywords": [
+        "Javascript",
+        "Algorithms"
+    ],
+    "author": "Arnaldo Gaspar V.",
+    "license": "BSD",
+    "readmeFilename": "README.md",
+    "gitHead": "ecfb51e631dcf360ac8d174dbed5b42f8a43779f",
+
+    "dependencies": {
+        "grunt": "~0.4.4",
+        "grunt-contrib-jshint": "~0.6.3",
+        "grunt-contrib-nodeunit": "~0.2.0",
+        "grunt-contrib-uglify": "~0.2.2",
+        "grunt-cafe-mocha": "*"
+    }
+}

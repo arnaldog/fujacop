@@ -78,3 +78,62 @@ function primeFactors(n) {
     return _primeFactors;
 }
 module.exports.primeFactors = primeFactors;
+
+
+// Ej: Factorial(0)
+
+function factorial(n) {
+
+    // return (n > 0) ? n*factorial(n-1) : 1; // factorial without cache
+    if (factorial.cache && factorial.cache[n]) {
+        return factorial.cache[n];
+    }
+
+    factorial.cache = factorial.cache || {};
+    factorial.cache[n] = (n > 0) ? n*factorial(n-1) : 1
+
+    return factorial.cache[n];
+
+}
+module.exports.factorial = factorial;
+
+
+/**
+ * Great Common Divisor
+ * @param  {Integer} a
+ * @param  {Integer} b
+ * @return {Integer} G.C.D
+ */
+function gcd(a, b) {
+    // Definition: the greatest c, such c|a && c|b => gcd(a, b) = c 
+    var _gcd = 1;
+    for(var i = Math.min(a, b); i > 0; i--) {
+        if(a % i === 0 & b % i === 0) {
+            _gcd = i;
+            break;
+        }
+    }
+
+    return _gcd;
+}
+module.exports.gcd = gcd;
+
+/**
+ * Returns if a is congruent to b modulo c
+ * @param  {[type]} a [description]
+ * @param  {[type]} b [description]
+ * @param  {[type]} m [description]
+ * @return {[type]}   [description]
+ */
+function congruent(a, b, m) {
+    return (a - b) % m == 0 // c | (a - b) or a %m == 0 & b % m == 0
+}
+
+module.exports.congruent = congruent;
+
+
+
+
+
+
+

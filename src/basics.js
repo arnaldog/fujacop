@@ -9,21 +9,21 @@
  * @param  {Integre} number the number to be decomposited
  * @return {Array} Array of factors
  */
-function factors(number) {
+function factors(n) {
 
-    if (factors.cache && factors.cache[number])
-        return factors.cache[number];
+    if (factors.cache && factors.cache[n])
+        return factors.cache[n];
 
     var _factors = [];
 
-    for (var i = 0; i <= number; i++) {
-        if (number % i === 0) {
+    for (var i = 0; i <= n; i++) {
+        if (n % i === 0) {
             _factors.push(i);
         }
     }
 
     factors.cache = factors.cache || {};
-    factors.cache[number] = _factors;
+    factors.cache[n] = _factors;
 
     return _factors;
 
@@ -57,3 +57,24 @@ function minOfArray(array) {
     return minArgument.apply(this, array);
 }
 module.exports.minOfArray = minOfArray;
+
+
+/**
+ * Prime factors
+ * @param  {integer} number number to be decomposed in prime factos
+ * @return {Array} the array of prime factors
+ */
+function primeFactors(n) {
+
+    var _primeFactors = [];
+
+    for (var i = 2; i <= n; i++) { // find the first divisible number
+        while (n % i === 0) {
+            _primeFactors.push(i);
+            n /= i;
+        }
+    }
+
+    return _primeFactors;
+}
+module.exports.primeFactors = primeFactors;

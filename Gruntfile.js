@@ -28,6 +28,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-cafe-mocha');
     // Default task(s).
-    grunt.registerTask('default', ['cafemocha', 'uglify']);
+    // grunt.registerTask('default', ['cafemocha', 'uglify']);
+    grunt.registerTask('default', ['cafemocha']);
 
 };

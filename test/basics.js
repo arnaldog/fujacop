@@ -7,6 +7,7 @@
 
 
 
+
  suite('basics', function() {
      test('Factors of a given number should return an array with numbers', function() {
          assert.deepEqual([1, 2, 3, 6], factors(6));
@@ -23,5 +24,10 @@
      test('Find a min value of an array', function() {
          assert.equal(1, minOfArray([1, 100, 99]));
      });
+
+     test('Find prime factors of a given number', function() {
+         assert.deepEqual([2, 2, 3], basics.primeFactors(12));
+     });
+
 
  });

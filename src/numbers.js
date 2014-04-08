@@ -6,7 +6,7 @@
 /**
  * This is a factor decomposition function for agiven number
  * Complexity: O(n)
- * @param  {Integre} number the number to be decomposited
+ * @param  {Integer} number the number to be decomposited
  * @return {Array} Array of factors
  */
 function factors(n) {
@@ -89,8 +89,8 @@ function factorial(n) {
         return factorial.cache[n];
     }
 
-    factorial.cache = factorial.cache || {};
-    factorial.cache[n] = (n > 0) ? n*factorial(n-1) : 1
+    factorial.cache = factorial.cache ||  {};
+    factorial.cache[n] = (n > 0) ? n * factorial(n - 1) : 1
 
     return factorial.cache[n];
 
@@ -107,8 +107,8 @@ module.exports.factorial = factorial;
 function gcd(a, b) {
     // Definition: the greatest c, such c|a && c|b => gcd(a, b) = c 
     var _gcd = 1;
-    for(var i = Math.min(a, b); i > 0; i--) {
-        if(a % i === 0 & b % i === 0) {
+    for (var i = Math.min(a, b); i > 0; i--) {
+        if (a % i === 0 & b % i === 0) {
             _gcd = i;
             break;
         }
@@ -126,14 +126,29 @@ module.exports.gcd = gcd;
  * @return {[type]}   [description]
  */
 function congruent(a, b, m) {
-    return (a - b) % m == 0 // c | (a - b) or a %m == 0 & b % m == 0
+    return (a - b) % m == 0; // c | (a - b) or a %m == 0 & b % m == 0
 }
 
 module.exports.congruent = congruent;
 
 
+/**
+ * Insertion Sort for JAvascript
+ * Complexity: O(n^2)
+ * @param  {Array} array
+ * @return {Array}
+ */
+function insertion_sort(array) {
+    for (var i = 0; i <= array.length; i++) {
+        var j = i;
+        while (j > 0 && array[j - 1] > array[j]) {
+            temp = array[j];
+            array[j] = array[j - 1];
+            array[j - 1] = temp;
+            j--;
+        }
+    }
+    return array;
+}
 
-
-
-
-
+module.exports.insertion_sort = insertion_sort;

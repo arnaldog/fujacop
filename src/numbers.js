@@ -132,23 +132,26 @@ function congruent(a, b, m) {
 module.exports.congruent = congruent;
 
 
+function fib(n) {
+    return (n > 1) ? fib(n - 1) + fib(n - 2) : n;
+}
+module.exports.fib = fib;
 /**
- * Insertion Sort for JAvascript
- * Complexity: O(n^2)
- * @param  {Array} array
- * @return {Array}
+ * f_n+1 = f_n + f_n-1
+ * f_0 = 0; f_1 = 1
+ * @param  {[type]} n [description]
+ * @return {[type]}   [description]
  */
-function insertion_sort(array) {
-    for (var i = 0; i <= array.length; i++) {
-        var j = i;
-        while (j > 0 && array[j - 1] > array[j]) {
-            temp = array[j];
-            array[j] = array[j - 1];
-            array[j - 1] = temp;
-            j--;
-        }
-    }
-    return array;
+function fibCache(n) {
+
+    fibCache.cache = fibCache.cache || {};
+
+    if (fibCache.cache[n])
+        return fibCache.cache[n];
+
+    fibCache.cache[n] = (n > 1) ? fibCache(n - 1) + fibCache(n - 2) : n;
+
+    return fibCache.cache[n];
 }
 
-module.exports.insertion_sort = insertion_sort;
+module.exports.fibCache = fibCache;

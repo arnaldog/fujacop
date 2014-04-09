@@ -61,4 +61,15 @@
          assert.equal(true, numbers.congruent(8 % 7, 8, 7));
      });
 
+     test('fibonacci without cache', function() {
+         assert.equal(8, numbers.fib(6));
+     });
+
+     test('fibonacci with cache', function() {
+         assert.equal(832040, numbers.fibCache(30));
+         assert.equal(514229, numbers.fibCache(29));
+
+     });
+
+
  });

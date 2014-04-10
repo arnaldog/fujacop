@@ -14,7 +14,9 @@
      });
 
      test("Merge sort", function() {
-         var array = [5, 9, 7, 2, 9, 2, 1];
+         //var array = [5, 2, 4, 6, 1, 3, 2, 6];
+         var array = [1, 3, 2, 1];
+         console.log(array);
          assert.equal(true, sorting.mergeSort(array));
      });
 

@@ -50,33 +50,50 @@ function merge(left, array) {
     }
 }
 
-function mergeSort(array) {
+function merge(array, start, end, middle) {
 
+    for (var i = start; i <= middle; i++) {
+        var j = (start == middle) ? i + 1 : i + middle + 1;
 
-    if (array.length > 2) {
-        var middle = array.length / 2 | 0;
-        var left = array.slice(0, middle);
-        var right = array.slice(middle, array.length);
+        if (array[i] > array[j]) {
+            var tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
 
-        console.log("current arrays", left, right);
-        mergeSort(left);
-        mergeSort(right);
-
-        console.log("please merge", left, right);
-
-    } else {
-        console.log("Uhuhhh Ending Element!", array);
-        if (array.length == 2) {
-
-            if (array[0] > array[1]) {
-                var temp = array[0];
-                array[0] = array[1];
-                array[1] = temp;
-                console.log("Now letsswap ending elements to", array);
+            if (array[i] < array[i + 1]) {
+                var tmp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = tmp;
             }
+
+        } else if (array[j] < array[i + 1]) {
+            var tmp = array[i + 1];
+            array[i + 1] = array[j];
+            array[j] = tmp;
         }
     }
-    // console.log("the array", array);
+
+    return;
+
+}
+
+function mergeSort(array, start, end) {
+
+    var start = start || 0;
+    var end = end || array.length - 1;
+    var middle = Math.floor((start + end) / 2);
+
+    if (middle == start) {
+        merge(array, start, end, middle);
+        return;
+    } else {
+        mergeSort(array, start, middle);
+        mergeSort(array, middle + 1, end);
+
+        merge(array, start, end, middle);
+    }
+
+    console.log(array)
 }
 
 module.exports.mergeSort = mergeSort;

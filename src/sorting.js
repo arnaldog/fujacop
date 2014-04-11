@@ -44,39 +44,35 @@ function binarySearch(array, number) {
 module.exports.binarySearch = binarySearch;
 
 
-function merge(left, array) {
-    for (var i = 0; i < left.length; i++) {
-
-    }
-}
-
-function mergeSort(array) {
 
 
-    if (array.length > 2) {
-        var middle = array.length / 2 | 0;
-        var left = array.slice(0, middle);
-        var right = array.slice(middle, array.length);
+function mergesort(array, start, end) {
+    var start = start || 0;
+    var end = end || array.length - 1;
+    var medium = ~~ ((start + end) / 2);
 
-        console.log("current arrays", left, right);
-        mergeSort(left);
-        mergeSort(right);
+    if (start == medium) {
+        var s = [];
+        if (array[start] > array[end]) {
+            var tmp = array[start];
+            array[start] = array[end];
+            array[end] = tmp;
 
-        console.log("please merge", left, right);
-
-    } else {
-        console.log("Uhuhhh Ending Element!", array);
-        if (array.length == 2) {
-
-            if (array[0] > array[1]) {
-                var temp = array[0];
-                array[0] = array[1];
-                array[1] = temp;
-                console.log("Now letsswap ending elements to", array);
-            }
         }
+
+        console.log(s, end);
+        return;
     }
-    // console.log("the array", array);
+
+    mergesort(array, start, medium);
+    mergesort(array, medium + 1, end);
+
+    console.log("this is array", array);
+
+
+
 }
 
-module.exports.mergeSort = mergeSort;
+
+
+module.exports.mergeSort = mergesort;

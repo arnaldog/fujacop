@@ -1,78 +1,98 @@
-/**
- * Insertion Sort for JAvascript
- * Complexity: O(n^2)
- * @param  {Array} array
- * @return {Array}
- */
-function insertionSort(array) {
-    for (var i = 0; i <= array.length; i++) {
-        var j = i;
-        while (j > 0 && array[j - 1] > array[j]) {
-            temp = array[j];
-            array[j] = array[j - 1];
-            array[j - 1] = temp;
-            j--;
+
+var search = (function(){
+
+    return {
+        dummy: function(array, number) {
+            for(var i = 0; i < array.length; i++) {
+                if (array[i] == number) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        /**
+         * [ 1, 2, 3, 4, 5, 6 ]
+         * Binary Search for Javascript
+         * T(n) = T(n/2) + c
+         * Input binary([1, 2, 3, 4], 0, array.length, 3);
+         */
+        binary: function binary(array, number) {
+            var middle = array.length / 2 | 0;
+
+            if (array[middle] == number)
+                return true;
+
+            var value = array[middle],
+                left = array.splice(0, middle);
+
+            return (number > value) ? binary(array, number) : binary(left, number);
         }
     }
-    return array;
-}
+})();
 
-module.exports.insertionSort = insertionSort;
-
+module.exports.search = search;
 
 
-/**
- * [ 1, 2, 3, 4, 5, 6 ]
- * Binary Search for Javascript
- * T(n) = T(n/2) + c
- * Input binarySearch([1, 2, 3, 4], 0, array.length, 3);
- */
-function binarySearch(array, number) {
+var sort = (function(){
 
-    var middle = array.length / 2 | 0;
+    var merge = function(left, right) {
+        var _merge = [],
+            i = 0,
+            j = 0;
 
-    if (array[middle] == number)
-        return true;
-
-    var value = array[middle],
-        left = array.splice(0, middle);
-
-    return (number > value) ? binarySearch(array, number) : binarySearch(left, number);
-
-}
-
-module.exports.binarySearch = binarySearch;
-
-
-
-
-function mergesort(array, start, end) {
-    var start = start || 0;
-    var end = end || array.length - 1;
-    var medium = ~~ ((start + end) / 2);
-
-    if (start == medium) {
-        var s = [];
-        if (array[start] > array[end]) {
-            var tmp = array[start];
-            array[start] = array[end];
-            array[end] = tmp;
-
+        while (i < left.length || j < right.length) {
+            if (i < left.length && j < right.length) {
+                if (left[i] < right[j]) {
+                    _merge.push(left[i]);
+                    i++;
+                } else {
+                    _merge.push(right[j]);
+                    j++;
+                }
+            } else if (i == (left.length - 1)) {
+                _merge.push(left[i]);
+                i++;
+            } else {
+                _merge.push(right[j]);
+                j++;
+            }
         }
 
-        console.log(s, end);
-        return;
+        return _merge;
+
     }
 
-    mergesort(array, start, medium);
-    mergesort(array, medium + 1, end);
-
-    console.log("this is array", array);
-
-
-
-}
+    var swap = function(array, i, j) {
+        var tmp = array[i];
+        array[i] = array[j];
+        array[j] = tmp;
+    }
 
 
+    return {
+        mergesort: function mergesort(array) {
+            if (array.length == 1) return array;
 
-module.exports.mergeSort = mergesort;
+            var length = array.length,
+                middle = ~~ length / 2 ;
+                left = array.splice(0, middle);
+
+            return merge(mergesort(left), mergesort(array));
+        },
+
+        insertion: function(array) {
+            for(var i = 1; i < array.length; i++) {
+                var j = i;
+                while( j > 0 && array[j - 1] > array[j]) {
+                    swap(array, j, j - 1);
+                    j--;
+                }
+            }
+            return array;
+        }
+    }
+})()
+
+
+
+module.exports.sort = sort;

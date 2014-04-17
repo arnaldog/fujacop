@@ -118,6 +118,12 @@ function gcd(a, b) {
 }
 module.exports.gcd = gcd;
 
+
+function mcd(a, b) {
+    if (b == 0) return a;
+    mcd(a, a % b);
+}
+
 /**
  * Returns if a is congruent to b modulo c
  * @param  {[type]} a [description]

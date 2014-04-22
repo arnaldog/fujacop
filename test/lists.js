@@ -2,8 +2,7 @@ var assert = require('assert');
 
 var lists = require('../src/lists'),
     ListNode = lists.lists.ListNode,
-    LinkedList = lists.lists.LinkedList,
-    Heapsort = lists.lists.Heapsort;
+    LinkedList = lists.lists.LinkedList;
 
 suite('Linked List Module', function() {
 
@@ -61,12 +60,6 @@ suite('Linked List Module', function() {
 
     });
 
-    test("Heapsort", function() {
-
-        var heapsort = new Heapsort([4, 3, 10, 5, 9, 6, 8, 7, 1, 2]);
-        assert.deepEqual([1, 2, 3, 4, 6, 7, 8, 9, 10], heapsort.sort(1, 10))
-
-    });
 
 
 

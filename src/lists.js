@@ -177,55 +177,46 @@ var lists = (function() {
 
     Heapsort.prototype.siftdown = function(k, n) {
 
-        // console.log("indexs", k, n)
-        // console.log("swapping", this.array[k], this.array[n])
-
-        //var tmp = this.array[k];
-        //this.array[k] = this.array[n];
-        //this.array[n] = tmp;
-
-
-
+        // i : parent
+        // j : child
         for (var i = k, j = i << 1; j < n; i = j, j = i << 1) {
 
 
-            if ((j + 1) <= n && this.array[j + 1] <= this.array[j]) {
+            if ((j + 1) <= n && this.array[j + 1] >= this.array[j]) {
                 j++; // nos vamos por la izquierda
             }
 
-            if (this.array[j] >= this.array[i]) {
+            if (this.array[j] <= this.array[i]) { // there is now a heap
                 break;
             }
 
-            var tmp = this.array[i];
-            this.array[i] = this.array[j];
-            this.array[j] = tmp;
+            this.swap(i, j);
 
         }
-
-        // console.log(this.array);
 
 
     }
 
-    Heapsort.prototype.sort = function(ini, last) {
+    Heapsort.prototype.swap = function(i, j) {
+        var tmp = this.array[i];
+        this.array[i] = this.array[j];
+        this.array[j] = tmp;
+    }
+
+    Heapsort.prototype.sort = function() {
 
         // Crear todos los heaps
-        for (var i = last; i > ini - 1; i--) {
-            this.siftdown(i, last);
+        var n = this.array.length - 1;
+
+        for (var i = n + 1; i > 0; i--) {
+            this.siftdown(i, n + 1);
         }
 
-        for (var i = last; i > ini; i--) {
-
-            var tmp = this.array[ini];
-            this.array[ini] = this.array[i];
-            this.array[i] = tmp;
-
-            this.siftdown(ini, i - 1);
+        for (var i = n; i > 2; i--) {
+            this.swap(1, i);
+            this.siftdown(1, i - 1);
         }
 
-
-        // remove null first element
         this.array.shift();
 
         return this.array;

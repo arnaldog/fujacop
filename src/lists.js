@@ -154,73 +154,11 @@ var lists = (function() {
         return Math.log(val) / Math.LN2;
     }
 
-    var Heapsort = function(array) {
-        console.log(array)
-        this.array = array;
-        array.splice(0, 0, null) // push empty element to beginning
-    };
-
-    Heapsort.prototype.siftup = function(value) {
-        this.array.push(value);
-
-        var n = this.array.length;
-        for (var i = n, j = i >> 1; i > 1; i = j, j = i >> 1) {
-
-            if (this.array[j] >= this.array[i]) break;
-
-            var tmp = this.array[i];
-            this.array[i] = this.array[j];
-            this.array[j] = tmp;
-
-        }
+    var TreeNode = function(index) {
+        this.index = index;
+        this.left = null;
+        this.right = null;
     }
-
-    Heapsort.prototype.siftdown = function(k, n) {
-
-        // i : parent
-        // j : child
-        for (var i = k, j = i << 1; j < n; i = j, j = i << 1) {
-
-
-            if ((j + 1) <= n && this.array[j + 1] >= this.array[j]) {
-                j++; // nos vamos por la izquierda
-            }
-
-            if (this.array[j] <= this.array[i]) { // there is now a heap
-                break;
-            }
-
-            this.swap(i, j);
-
-        }
-
-
-    }
-
-    Heapsort.prototype.swap = function(i, j) {
-        var tmp = this.array[i];
-        this.array[i] = this.array[j];
-        this.array[j] = tmp;
-    }
-
-    Heapsort.prototype.sort = function() {
-
-        // Crear todos los heaps
-        var n = this.array.length - 1;
-
-        for (var i = n + 1; i > 0; i--) {
-            this.siftdown(i, n + 1);
-        }
-
-        for (var i = n; i > 2; i--) {
-            this.swap(1, i);
-            this.siftdown(1, i - 1);
-        }
-
-        this.array.shift();
-
-        return this.array;
-    };
 
 
 

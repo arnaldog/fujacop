@@ -49,6 +49,32 @@ var sort = (function() {
     }
 
     /**
+     * Insertion Sort Algorithm
+     * @param {Array} array Unordered array
+     */
+    var InsertionSort = function(array) {
+        Sort.call(this, array);
+    };
+
+    InsertionSort.prototype = Object.create(Sort.prototype);
+
+    InsertionSort.prototype.constructor = InsertionSort;
+
+    InsertionSort.prototype.sort = function() {
+
+        for (var i = 1; i < this.array.length; i++) {
+            var j = i;
+            while (j > 0 && this.array[j - 1] > this.array[j]) {
+                this.swap(j, j - 1);
+                j--;
+            }
+        }
+
+        return this.array;
+    }
+
+
+    /**
      * MergeSort
      * @param {Array} array unordered array
      */
@@ -157,31 +183,6 @@ var sort = (function() {
         this.array.shift();
         return this.array;
     };
-
-    /**
-     * Insertion Sort Algorithm
-     * @param {Array} array Unordered array
-     */
-    var InsertionSort = function(array) {
-        Sort.call(this, array);
-    };
-
-    InsertionSort.prototype = Object.create(Sort.prototype);
-
-    InsertionSort.prototype.constructor = InsertionSort;
-
-    InsertionSort.prototype.sort = function() {
-
-        for (var i = 1; i < this.array.length; i++) {
-            var j = i;
-            while (j > 0 && this.array[j - 1] > this.array[j]) {
-                this.swap(j, j - 1);
-                j--;
-            }
-        }
-
-        return this.array;
-    }
 
 
     var QuickSort = function(array) {

@@ -160,4 +160,76 @@ function fibCache(n) {
     return fibCache.cache[n];
 }
 
+
+/**
+ * Large numbers multiplication
+ * @param  {String} a first number
+ * @param  {String} b second num
+ * @return {String}   [description]
+ * a = 15
+ * b = 32
+ */
+function multiplication(a, b) {
+    a = a + "";
+    a = a.split('');
+
+    b = b + "";
+    b = b.split("");
+
+    var n = a.length;
+    var m = b.length;
+
+    var table = {};
+    var max = 0;
+    var result = [];
+
+    var i, j, k, carry, value;
+
+    for (i = n - 1, k = 0; i >= 0; i--, k++) {
+        carry = 0;
+        value = 0;
+        table[k] = [];
+
+        for (j = m - 1; j >= 0; j--) {
+
+            value = a[i] * b[j] + carry;
+            carry = (value - value % 10) / 10;
+            value = (carry > 0) ? value - carry * 10 : value;
+            //table[k].splice(0, 0, value);
+            table[k].push(value);
+
+            if (j === 0 && carry !== 0) {
+                //table[k].splice(0, 0, carry);
+                table[k].push(carry);
+            }
+        }
+
+        for (var s = k; s > 0; s--) {
+            table[k].splice(0, 0, 0);
+        }
+
+        if (table[k].length >= max) {
+            max = table[k].length;
+        }
+    }
+
+    carry = 0;
+    for (j = 0; j < max; j++) {
+        var sum = 0;
+        value = 0;
+        for (i = 0; i < n; i++) {
+            value = table[i][j];
+            value = (value != undefined) ? value : 0;
+            sum += value;
+        }
+        sum += carry;
+        carry = (sum - sum % 10) / 10;
+        sum = (carry > 0) ? sum - carry * 10 : sum;
+
+        result.splice(0, 0, sum);
+    }
+
+    return result.join('');
+};
+
 module.exports.fibCache = fibCache;
